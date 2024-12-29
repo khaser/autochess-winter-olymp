@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.follows = "khaser/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -17,7 +17,7 @@
               django
               mysqlclient
             ]
-          );
+          )
         ];
       };
     });
