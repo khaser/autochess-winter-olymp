@@ -14,7 +14,12 @@ document.querySelectorAll('.cell').forEach(cell => {
         event.preventDefault();
         const unitId = event.dataTransfer.getData('text');
         const unit = document.getElementById(unitId);
-        if (unit && !cell.childElementCount) {
+        //const x = unit.getAttribute("data-x")
+        //console.log(unit.getAttributeNames())
+        //console.log(unit.getAttribute("class"))
+        const y = cell.getAttribute("data-y")
+        console.log(y)
+        if (unit && !cell.childElementCount && y > 4) {
             cell.appendChild(unit);
         }
     });
