@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from django.contrib.auth.models import User
+from users.models import UserInfo
 
 from ejudge.database import EjudgeDatabase
 from . import forms
@@ -31,12 +31,15 @@ def login(request):
         if form.is_valid():
             login = form.cleaned_data['login']
             password = form.cleaned_data['password']
+
             is_correct, ejudge_user_id = is_login_and_password_correct(login, password)
+
             if is_correct:
-                user = get_user_or_create(login, password, ejudge_user_id)
-                auth.login(request, user)
+                userInfo = UserInfo.objects.filter(ejudge_user_id=ejudge_user_id).get()
+                auth.login(request, userInfo.user)
                 return redirect('map:index')
-            form.add_error('password', 'Неверный пароль')
+            else:
+                form.add_error('password', 'Неверный логин/пароль')
     else:
         form = forms.LoginForm()
     return render(request, 'users/login.html', {'form': form})

@@ -18,55 +18,18 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
-      "inputs": {
-        "systems": "systems_2"
-      },
-      "locked": {
-        "lastModified": 1701680307,
-        "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "4022d587cbbfd70fe950c1e2083a02621806a725",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "khaser": {
-      "inputs": {
-        "nixpkgs": "nixpkgs",
-        "sway-vim-kbswitch": "sway-vim-kbswitch"
-      },
-      "locked": {
-        "lastModified": 1709776333,
-        "narHash": "sha256-6mMMHCnWh6TXrYzxfRqXzq9SbFJamBQC0Uz7g5X4ui4=",
-        "owner": "khaser",
-        "repo": "nix-vim-config",
-        "rev": "0bfa0e397072058d15135898c2cce2e6045b940f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "khaser",
-        "repo": "nix-vim-config",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1703068421,
-        "narHash": "sha256-WSw5Faqlw75McIflnl5v7qVD/B3S2sLh+968bpOGrWA=",
+        "lastModified": 1735264675,
+        "narHash": "sha256-MgdXpeX2GuJbtlBrH9EdsUeWl/yXEubyvxM1G+yO4Ak=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d65bceaee0fb1e64363f7871bc43dc1c6ecad99f",
+        "rev": "d49da4c08359e3c39c4e27c74ac7ac9b70085966",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-23.11",
+        "ref": "nixos-24.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -74,51 +37,10 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "khaser": "khaser",
-        "nixpkgs": [
-          "khaser",
-          "nixpkgs"
-        ]
-      }
-    },
-    "sway-vim-kbswitch": {
-      "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": [
-          "khaser",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1704458289,
-        "narHash": "sha256-fP3WlMthtPNCMKZFp87MRcX/b+rna7i0gDhAxNQzeDc=",
-        "owner": "khaser",
-        "repo": "sway-vim-kbswitch",
-        "rev": "56b0914acdd92ec013f04725114d53614803793b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "khaser",
-        "repo": "sway-vim-kbswitch",
-        "type": "github"
+        "nixpkgs": "nixpkgs"
       }
     },
     "systems": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_2": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

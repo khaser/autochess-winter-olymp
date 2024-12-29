@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.follows = "khaser/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -12,12 +12,13 @@
       devShell = pkgs.mkShell {
         name = "django application";
         buildInputs = with pkgs; [
-          pkgs.python3.withPackages (python-pkgs:
+          (pkgs.python3.withPackages (python-pkgs:
             with python-pkgs; [
               django
               mysqlclient
             ]
-          );
+          ))
+          # mysql80
         ];
       };
     });

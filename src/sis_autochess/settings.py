@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'ejudge',
     'users',
+    'battles',
 ]
 
 MIDDLEWARE = [
@@ -88,8 +89,8 @@ DATABASES = {
         'USER': 'w2021-olymp',
         'PASSWORD': 'w2021-olymp',
         # TODO: change host
-        'HOST': '192.168.32.207',
-        'PORT': '3306',
+        'HOST': '127.0.0.1',
+        'PORT': '8001',
     },
 }
 
@@ -141,6 +142,10 @@ LOGOUT_URL = '/users/logout/'
 EJUDGE_CONTEST_ID = 43998
 # EJUDGE_SERVE_CFG = os.path.join(BASE_DIR, '..', 'serve.cfg')
 EJUDGE_SERVE_CFG_ENCODING = 'utf-8'
+
+REGISTRED_TEAMS = [
+                    '4-bubnov',
+                  ]
 
 import datetime
 CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 15, 30, 0)
