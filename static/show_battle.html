@@ -4,30 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Battle</title>
-    <link
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Style for the sidebar menu */
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            height: 100vh;
+            box-sizing: border-box;
+        }
 
+        .sidebar button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            color: white;
+            background-color: #444;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+        
+        .sidebar button:hover {
+            background-color: #555;
+        }
 
-rel="stylesheet" href="style.css">
+        /* Style for the main content */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Style for the battle grid */
+        .battle-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 50px);
+            grid-template-rows: repeat(8, 50px);
+            gap: 2px;
+        }
+
+        .grid-cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
-    <div class="menu">
-        <a href="/battle">Battle</a>
-        <a href="/planning">Placement</a>
+
+<div class="sidebar">
+    <button onclick="window.location.href='/battle'">Battle</button>
+    <button onclick="window.location.href='/planning'">Placement</button>
+</div>
+
+<div class="main-content">
+    <div class="battle-grid">
+        <!-- Dynamic Cells -->
+        <!-- Example cells, you might replace content with actual data or visual representation -->
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <!-- Replicate to fill 8 rows -->
+        <!-- The actual logic to fill these consistently will depend on your JavaScript implementation -->
     </div>
-    <div class="content">
-        <div class="battlefield-container">
-            <div class="battlefield">
-                <!-- Generate the battlefield grid -->
-                <div></div>
-                <!-- Repeat for 64 divs -->
-            </div>
-            <div class="buttons">
-                <button>-5 turns</button>
-                <button>-1 turn</button>
-                <button>+1 turn</button>
-                <button>+5 turns</button>
-            </div>
-        </div>
-    </div>
+</div>
+
+<div class="sidebar">
+    <button onclick="navigateTurns(-5)">-5 turns</button>
+    <button onclick="navigateTurns(-1)">-1 turn</button>
+    <button onclick="navigateTurns(1)">+1 turn</button>
+    <button onclick="navigateTurns(5)">+5 turns</button>
+</div>
+
+<script>
+    // Function to handle turn navigation
+    function navigateTurns(change) {
+        const battleId = 123; // Replace with actual battle ID from your backend
+        const currentTurn = 0; // Replace with the actual current turn
+
+        newTurn = currentTurn + change;
+        if (newTurn < 0) {
+            newTurn = 0;
+        }
+        window.location.href = `/battles/${battleId}/${newTurn}`;
+    }
+    
+    // DOM manipulation or data fetching logic can be added here
+</script>
+
 </body>
 </html>
