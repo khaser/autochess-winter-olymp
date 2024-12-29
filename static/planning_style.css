@@ -6,70 +6,70 @@ body {
     height: 100vh;
 }
 
-.menu {
+
+.sidebar {
+    width: 15%;
     background-color: #333;
-    padding: 10px;
-    width: 150px;
     color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
+    padding: 15px;
+    height: 100vh; /* Full viewport height */
+    box-sizing: border-box;
 }
 
-.menu a {
-    text-decoration: none;
-    color: white;
-    margin: 5px 0;
+
+.sidebar button {
+    width: 100%;
     padding: 10px;
+    margin-top: 10px;
+    color: white;
+    background-color: #444;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.sidebar button:hover {
     background-color: #555;
-    border-radius: 5px;
-    width: 80%;
-    text-align: center;
 }
 
-.menu a:hover {
-    background-color: #777;
-}
 
 .content {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
+    width: 70%;
     align-items: center;
-}
-
-.main-content {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
 }
 
 .battlefield-container {
-    margin-right: 20px;
+    width: 100%;
 }
 
 .battlefield {
+    justify-content: center;
+    margin-top: 3%;
     display: grid;
-    grid-template-columns: repeat(8, 100px);
-    grid-template-rows: repeat(8, 100px);
+    grid-template-columns: repeat(8, 80px);
+    grid-template-rows: repeat(8, 80px);
     gap: 2px;
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border: 1px solid #ddd;
     background-color: #f2f2f2;
 }
 
 .unplaced-units {
-    width: 150px;
-    height: 750px; /* Adjust depending on your design */
-    overflow-y: auto;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 80px);
+    /*grid-template-rows: repeat(8, 80px);*/
+
+    gap: 2px;
+    width: 100%;
+    height: 90%;
+    /*height: 100%; !* Adjust depending on your design *!*/
+    overflow-y: scroll;
     border: 1px solid #ccc;
-    padding: 10px;
     box-sizing: border-box;
 }
 
@@ -79,18 +79,17 @@ body {
 }
 
 .unit {
-    background-size: cover; 
+    background-size: cover;
     background-position: center; /* Centers the image within the element */
     background-repeat: no-repeat; /* Prevents the image from repeating */
 
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
 
     /*margin: 10px;*/
     background-color: #ddd;
     border-radius: 5px;
     cursor: pointer;
-    text-align: left-side;
 }
 
 .unit-archer {
