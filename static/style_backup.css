@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.menu {
+    background-color: #333;
+    padding: 10px;
+    width: 150px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #555;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.menu a:hover {
+    background-color: #777;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-container, .battlefield-container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.battle-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.battle-table th, .battle-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.battle-table th {
+    background-color: #f2f2f2;
+}
+
+.battlefield {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 2px;
+}
+
+.battlefield div {
+    border: 1px solid #ddd;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons button {
+    margin: 10px;
+    padding: 10px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    background-color: #ccc;
+}

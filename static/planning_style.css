@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.menu {
+    background-color: #333;
+    padding: 10px;
+    width: 150px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #555;
+    border-radius: 5px;
+    width: 80%;
+    text-align: center;
+}
+
+.menu a:hover {
+    background-color: #777;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.battlefield-container {
+    margin-right: 20px;
+}
+
+.battlefield {
+    display: grid;
+    grid-template-columns: repeat(8, 100px);
+    grid-template-rows: repeat(8, 100px);
+    gap: 2px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+}
+
+.unplaced-units {
+    width: 150px;
+    height: 750px; /* Adjust depending on your design */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.unplaced-units h3 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.unit {
+    background-size: cover; 
+    background-position: center; /* Centers the image within the element */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+
+    height: 100px;
+    width: 100px;
+
+    /*margin: 10px;*/
+    background-color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left-side;
+}
+
+.unit-archer {
+    background: gray;
+}
+
+.unit-berserker {
+    background: red;
+}
+
+.unit-cavalry {
+    background-image: url('/images/cavalry.jpg');
+}
+
+.unit-commander {
+    background: blue;
+}
+
+.unit-guardsman {
+    background: green;
+}
+
+.unit-infantryman {
+    background: purple;
+}
+
+.unit-knight {
+    background: pink;
+}
+
