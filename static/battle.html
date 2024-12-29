@@ -3,38 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battle</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Battle Page</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Style for the sidebar menu */
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            height: 100vh; /* Full viewport height */
+            box-sizing: border-box;
+        }
+        
+        .sidebar button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            color: white;
+            background-color: #444;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+        
+        .sidebar button:hover {
+            background-color: #555;
+        }
+
+        /* Style for the main content */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <div class="menu">
-        <a href="/battle">Battle</a>
-        <a href="/planning">Placement</a>
-    </div>
-    <div class="content">
-        <div class="table-container">
-            <table class="battle-table">
-                <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>First Team</th>
-                        <th>Second Team</th>
-                        <th>Winner</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>12:00 PM</td>
-                        <td>Team A</td>
-                        <td>Team B</td>
-                        <td>Team B</td>
-                        <td><a href="/battles/1/0"><button>View Battle</button></a></td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+<div class="sidebar">
+    <button onclick="window.location.href='/battle'">Battle</button>
+    <button onclick="window.location.href='/planning'">Placement</button>
+</div>
+
+<div class="main-content">
+    <h1>Battles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Time of Battle</th>
+                <th>First Team</th>
+                <th>Second Team</th>
+                <th>Winner</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example Row -->
+            <tr>
+                <td>12:00 PM, 1st Nov 2023</td>
+                <td>Team A</td>
+                <td>Team B</td>
+                <td>Team A</td>
+                <td><button onclick="window.location.href='/battles/123/0'">View Battle</button></td>
+            </tr>
+            <!-- Add more rows dynamically in a real application -->
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>
