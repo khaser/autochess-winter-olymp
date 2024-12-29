@@ -12,19 +12,3 @@ class UserInfo(models.Model):
         default=0,
         blank=True,
     )
-
-
-@receiver(post_save, sender=auth_models.User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if 'raw' in kwargs and kwargs['raw']:
-        return
-    if created:
-        UserInfo.objects.create(user=instance)
-
-
-# TODO: is called?
-@receiver(post_save, sender=auth_models.User)
-def save_user_profile(sender, instance, **kwargs):
-    if 'raw' in kwargs and kwargs['raw']:
-        return
-    instance.info.save()
