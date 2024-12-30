@@ -95,12 +95,17 @@ body {
 }
 
 .unit-healths {
-            position: relative;
-            bottom: -50px;
-            left: 0px;
-            width: 30px;  /* Example size, adjust as needed */
-            height: 30px; /* Example size, adjust as needed */
-        }
+    position: relative;
+    bottom: -50px;
+    left: 0px;
+    width: 30px; /* Example size, adjust as needed */
+    height: 30px; /* Example size, adjust as needed */
+}
+
+.cross {
+    width: 80px; /* Example size, adjust as needed */
+    height: 80px; /* Example size, adjust as needed */
+}
 
 .unit-archer {
     background: gray;

@@ -20,18 +20,18 @@ document.querySelectorAll('.cell').forEach(cell => {
         if (unit && !cell.childElementCount && y > 4) {
             cell.appendChild(unit);
             const url = '/battles/planning';
-            const textData = x + " " + y + " " + unit.getAttrubute("id");
+            const textData = x + " " + y + " " + unit.getAttribute("id");
             const options = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'text/plain',
                 },
-                body: textData 
+                body: textData
             };
 
             fetch(url, options);
         }
-    );
+    });
 });
 
 const unplacedUnitsContainer = document.getElementById('unplaced-units');
@@ -47,5 +47,16 @@ unplacedUnitsContainer.addEventListener('drop', event => {
 
     if (unit) {
         unplacedUnitsContainer.appendChild(unit);
+        const url = '/battles/planning';
+        const textData = unit.getAttribute("id");
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain',
+            },
+            body: textData
+        };
+
+        fetch(url, options);
     }
 });

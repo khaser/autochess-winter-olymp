@@ -7,13 +7,17 @@
             {% for i in indexes8 %}
             {%     for j in indexes8 %}
             <div class="cell" id="cell-{{ i }}-{{ j }}" data-x="{{ i }}" data-y="{{ j }}">
-            {%         for fighter in placed_fighters %}
-            {%             if fighter.x == i and fighter.y == j %} 
+            {%         if j < 5 %}
+                <img src="/static/images/cross.png" class="cross">
+            {%         else %}
+            {%             for fighter in placed_fighters %}
+            {%                 if fighter.x == i and fighter.y == j %}
                 <div class="unit unit-{{ fighter.fighter_kind }}" draggable="true" id="{{ fighter.shortname }}">
-                    <img src="images/healths/{{ fighter.hp }}.png" class="unit-healths">
+                    <img src="/static/images/healths/{{ fighter.hp }}.png" class="unit-healths">
                 </div>
-            {%             endif %} 
-            {%         endfor %}
+            {%                 endif %}
+            {%             endfor %}
+            {%         endif %}
             </div>
             {%     endfor %}
             {% endfor %}
@@ -28,11 +32,11 @@
     <div class="unplaced-units" id="unplaced-units">
         {% for fighter in unplaced_fighters %}
         <div class="unit unit-{{ fighter.fighter_kind }}" draggable="true" id="{{ fighter.shortname }}">
-            <img src="images/healths/{{ fighter.hp }}.png" class="unit-healths">
+            <img src="/static/images/healths/{{ fighter.hp }}.png" class="unit-healths">
         </div>
         {% endfor %}
     </div>
 </div>
 
-<script src="fighter_placement_post.js"></script>
+<script src="/static/scripts/fighter_placement_post.js"></script>
 {% endblock %}

@@ -62,15 +62,29 @@ def planning(request):
                 return Http406("invalid number of arguments")
 
     elif request.method == 'GET':
-        fighters = []
+        unplaced_fighters = [
+            { "shortname": "A", "fighter_kind" : "cavalry", "hp" : "13"},
+            { "shortname": "B", "fighter_kind" : "knight", "hp" : "15"},
+            { "shortname": "C", "fighter_kind" : "archer", "hp" : "5"}
+        ]
+        placed_fighters = [
+            { "shortname": "D", "fighter_kind" : "cavalry", "hp" : "13", "x" : 6, "y" : 6},
+            { "shortname": "E", "fighter_kind" : "knight", "hp" : "15", "x" : 6, "y" : 7},
+            { "shortname": "F", "fighter_kind" : "archer", "hp" : "5", "x" : 5, "y" : 7}
+        ]
+
 
         for fighter in plc.positionedfigher_set.all():
             # TODO
             # fighters.append()
             pass
 
+        indexes8 = list(range(8))
+
         return render(request, 'battles/planning.html', {
-            'fighters': fighters
+            'unplaced_fighters': unplaced_fighters,
+            'placed_fighters': placed_fighters,
+            'indexes8': indexes8
         })
 
 
