@@ -64,7 +64,7 @@ body {
     justify-content: center;
     display: grid;
     grid-template-columns: repeat(2, 80px);
-    /*grid-template-rows: repeat(8, 80px);*/
+    grid-template-rows: repeat(8, 80px);
 
     gap: 2px;
     width: 100%;
@@ -198,3 +198,21 @@ h1 {
     width: 350px;
     height: 350px;
 }
+
+.sections {
+    overflow-y: scroll;
+    height: 85%;
+}
+
+.a {
+    font-weight: bold;
+    pointer-events: painted;
+}
+
+.section {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            padding: 15px;
+        }

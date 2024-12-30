@@ -12,4 +12,5 @@ urlpatterns = [
     path('rules/lore', views.lore, name='lore'),
     path('rules/combat', views.combat, name='combat'),
     path('rules/monsters', views.monsters, name='monsters'),
+    path('scores', views.scores, name='scores'),
 ]

@@ -54,6 +54,19 @@ def index(request):
     })
 
 
+def scores(request):
+    results = [
+        {"place" : 1, "name" : "ABOBA", "score" : 100},
+        {"place" : 2, "name" : "sample_text", "score" : 77},
+        {"place" : 3, "name" : "kto prochital", "score" : 69},
+        {"place" : 4, "name" : "tot molodec", "score" : 55},
+    ]
+
+    return render(request, 'battles/scores.html', {
+        'results': results
+    })
+
+
 @login_required
 @csrf_exempt
 def planning(request):
