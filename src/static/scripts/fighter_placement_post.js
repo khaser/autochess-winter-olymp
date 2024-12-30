@@ -14,15 +14,24 @@ document.querySelectorAll('.cell').forEach(cell => {
         event.preventDefault();
         const unitId = event.dataTransfer.getData('text');
         const unit = document.getElementById(unitId);
-        //const x = unit.getAttribute("data-x")
-        //console.log(unit.getAttributeNames())
-        //console.log(unit.getAttribute("class"))
-        const y = cell.getAttribute("data-y")
+        const x = cell.getAttribute("data-x");
+        const y = cell.getAttribute("data-y");
         console.log(y)
         if (unit && !cell.childElementCount && y > 4) {
             cell.appendChild(unit);
+            const url = '/battles/planning';
+            const textData = x + " " + y + " " + unit.getAttrubute("id");
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                body: textData 
+            };
+
+            fetch(url, options);
         }
-    });
+    );
 });
 
 const unplacedUnitsContainer = document.getElementById('unplaced-units');
