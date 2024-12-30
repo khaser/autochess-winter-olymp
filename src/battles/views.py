@@ -87,6 +87,24 @@ def planning(request):
             'indexes8': indexes8
         })
 
+def lore(request):
+
+        return render(request, 'battles/rules/lore.html', {
+
+        })
+
+def combat(request):
+
+        return render(request, 'battles/rules/combat.html', {
+
+        })
+
+def monsters(request):
+
+        return render(request, 'battles/rules/monsters.html', {
+
+        })
+
 
 def post_fighter(row, column, task_sn, user):
     try:

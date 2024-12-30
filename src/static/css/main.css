@@ -108,7 +108,7 @@ body {
 }
 
 .unit-archer {
-    background: gray;
+    background-image: url('/static/images/fighters/archer.png');
 }
 
 .unit-berserker {
@@ -120,15 +120,15 @@ body {
 }
 
 .unit-commander {
-    background: blue;
+    background-image: url('/static/images/fighters/commander.png');
 }
 
 .unit-guardsman {
-    background: green;
+    background-image: url('/static/images/fighters/guardsman.png');
 }
 
 .unit-infantryman {
-    background: purple;
+    background-image: url('/static/images/fighters/infantryman.png');
 }
 
 .unit-knight {
@@ -159,3 +159,42 @@ td {
     border-bottom: 1px solid #ddd;
 }
 
+
+.title {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.creature {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 15px;
+}
+
+.description {
+    font-weight: bold;
+}
+
+.stats {
+    margin-top: 10px;
+}
+
+.stats div {
+    margin: 5px 0;
+}
+
+.creatures {
+    overflow-y: scroll;
+    height: 85%;
+}
+
+.creature-portrait {
+    width: 350px;
+    height: 350px;
+}

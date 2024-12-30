@@ -8,4 +8,8 @@ urlpatterns = [
     path('<int:battle_id>/<int:turn>', views.details, name='details'),
     # TODO: 303 into /battles/<id>/0
     path('planning', views.planning, name='planning'),
+    path('rules', views.lore, name='lore'),
+    path('rules/lore', views.lore, name='lore'),
+    path('rules/combat', views.combat, name='combat'),
+    path('rules/monsters', views.monsters, name='monsters'),
 ]
