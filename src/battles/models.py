@@ -9,16 +9,16 @@ from users import models as user_models
 class Fighter(models.Model):
 
     class FighterKind(models.TextChoices):
-        ARCHER = 'ARC', _('archer')
-        BERSERKER = 'BER', _('berserker')
-        CAVALRY = 'CAV', _('cavalry')
-        COMMANDER = 'COM', _('commander')
-        KNIGHT = 'KN', _('knight')
-        INFANTRYMAN = 'INF', _('infantryman')
+        ARCHER = 'archer', _('archer')
+        BERSERKER = 'berserker', _('berserker')
+        CAVALRY = 'cavalry', _('cavalry')
+        COMMANDER = 'commander', _('commander')
+        KNIGHT = 'knight', _('knight')
+        INFANTRYMAN = 'infantryman', _('infantryman')
 
     kind = models.CharField(
         choices=FighterKind.choices,
-        max_length = 3,
+        max_length = 16,
     )
 
     ejudge_short_name = models.CharField(db_index=True, max_length=255)
@@ -33,17 +33,18 @@ class PositionedFigher(models.Model):
     column = models.PositiveIntegerField()
     placement = models.ForeignKey(Placement, on_delete=models.CASCADE)
 
+
+class BattleResult(models.TextChoices):
+    RED = 'red', _('red')
+    BLUE = 'blue', _('blue')
+
 class Battle(models.Model):
 
     red_placement = models.OneToOneField(Placement, on_delete=models.CASCADE, related_name = "battles_as_red")
     blue_placement = models.OneToOneField(Placement, on_delete=models.CASCADE, related_name = "battles_as_blue")
 
-    class BattleResult(models.TextChoices):
-        RED = 'R', _('blue')
-        BLUE = 'B', _('red')
-
     result = models.CharField(
         choices=BattleResult.choices,
-        max_length=1,
+        max_length=16,
         blank=True,
     )

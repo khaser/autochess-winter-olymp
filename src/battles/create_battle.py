@@ -13,8 +13,11 @@ def create_battle(red_username, blue_username):
     battle = battle_models.Battle.objects.create(red_placement=red_plc,blue_placement=blue_plc)
 
     # TODO: generate seed and store to DB
-    (red_team_fin, blue_team_fin, _) = \
-        game.fight(map_fighters(red_plc), map_fighters(blue_plc), settings.TURNS_IN_ROUND_LIMIT, 1)
+    red_team = map_fighters(red_plc)
+    blue_team = map_fighters(blue_plc)
+    print(red_team)
+    print(blue_team)
+    (red_team_fin, blue_team_fin, _) = game.fight(red_team, blue_team, settings.TURNS_IN_ROUND_LIMIT, 1)
 
     if len(red_team_fin) > 0:
         battle.result = battle_models.BattleResult.RED
@@ -22,6 +25,7 @@ def create_battle(red_username, blue_username):
         battle.result = battle_models.BattleResult.BLUE
     else:
         raise f"Game not finished, fighters alive: (red: {len(red_team_fin)}, blue: {len(blue_team_fin)})"
+    battle.save()
 
 def copy_user_placement(username):
     user = user_models.UserInfo.objects.get(user__first_name=username)
@@ -29,7 +33,14 @@ def copy_user_placement(username):
     battle_plc_id = plc.id
     plc.id = None
     plc.save()
-    return user.placement_set.get(pk=battle_plc_id)
+
+    prev_plc = user.placement_set.get(pk=battle_plc_id)
+    for fighter in prev_plc.positionedfigher_set.all():
+        fighter.placement = plc
+        fighter.id = None
+        fighter.save()
+
+    return prev_plc
 
 def map_fighters(plc):
     return [map_fighter(db_fighter) for db_fighter in plc.positionedfigher_set.all()]

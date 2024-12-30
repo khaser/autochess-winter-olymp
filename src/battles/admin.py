@@ -12,7 +12,7 @@ class PlacementAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user')
 
 class BattleAdmin(admin.ModelAdmin):
-    list_display = ('red_placement', 'blue_placement')
+    list_display = ('pk', 'red_placement', 'blue_placement')
 
 admin.site.register(models.Fighter, FighterAdmin)
 admin.site.register(models.PositionedFigher, PositionedFigherAdmin)

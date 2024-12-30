@@ -21,9 +21,11 @@ class UsersConfig(AppConfig):
 
             user = User.objects.create_user(login, first_name=login)
             userInfo = UserInfo.objects.create(user=user, ejudge_user_id=ejudge_user_id)
-            battles_models.Placement.objects.create(user=userInfo)
+            placement = battles_models.Placement.objects.create(user=userInfo)
 
             # TODO: check submitted tasks
+            fighter = battles_models.Fighter.objects.first()
+            battles_models.PositionedFigher.objects.create(placement=placement, row=1, column=1, fighter=fighter)
 
             return userInfo
 
@@ -31,3 +33,4 @@ class UsersConfig(AppConfig):
 
         for team_login in settings.REGISTRED_TEAMS:
             create_user(team_login)
+

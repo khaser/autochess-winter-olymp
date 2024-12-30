@@ -157,7 +157,7 @@ import datetime
 CONTEST_DURATION = datetime.timedelta(hours=5)
 
 # CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 15, 30, 0)
-CONTEST_START_TIME = datetime.datetime(2024, 12, 30, 17, 9, 0)
+CONTEST_START_TIME = datetime.datetime(2024, 12, 30, 18, 9, 0)
 
 # ROUND_FREQ = datetime.timedelta(minutes=15)
 ROUND_FREQ = datetime.timedelta(seconds=60)
