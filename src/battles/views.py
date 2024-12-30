@@ -51,9 +51,9 @@ def index(request):
 
 @login_required
 def planning(request):
-    plc = request.user.get_cur_placement()
+    user = request.user.info
+    plc = user.get_cur_placement()
 
-    # TODO: rewrite
     if request.method == 'POST':
         match request.body().split():
             case (row, column, task):
