@@ -20,6 +20,5 @@ function onPageStart() {
     })
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    onPageStart();
-});
+document.addEventListener('DOMContentLoaded', onPageStart);
+window.addEventListener('resize', onPageStart);
