@@ -2,8 +2,9 @@
 
 {% block content %}
 <!DOCTYPE html>
-<table>
-    <thead>
+<div class="content" id="battles-list">
+    <table>
+        <thead>
         <tr>
             <th>Time of Battle</th>
             <th>First Team</th>
@@ -11,8 +12,8 @@
             <th>Winner</th>
             <th>Details</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         <!-- Example Row -->
         {% for battle in battles %}
         <tr>
@@ -20,10 +21,14 @@
             <td>{{ battle.red_username }}</td>
             <td>{{ battle.blue_username }}</td>
             <td>{{ battle.winner_username }}</td>
-            <td><button onclick="window.location.href='/battles/{{battle.battle_id}}/0'">View Battle</button></td>
+            <td>
+                <button onclick="window.location.href='/battles/{{battle.battle_id}}/0'">View Battle</button>
+            </td>
         </tr>
         {% endfor %}
         <!-- Add more rows as needed -->
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 {% endblock %}
+
