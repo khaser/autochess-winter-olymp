@@ -92,16 +92,24 @@ body {
     cursor: pointer;
 }
 
+.unit-healths {
+            position: relative;
+            bottom: -50px;
+            left: 0px;
+            width: 30px;  /* Example size, adjust as needed */
+            height: 30px; /* Example size, adjust as needed */
+        }
+
 .unit-archer {
     background: gray;
 }
 
 .unit-berserker {
-    background: red;
+    background-image: url('images/fighters/berserker.png');
 }
 
 .unit-cavalry {
-    background-image: url('/images/cavalry.jpg');
+    background-image: url('images/fighters/cavalry.png');
 }
 
 .unit-commander {
@@ -117,5 +125,5 @@ body {
 }
 
 .unit-knight {
-    background: pink;
+    background-image: url('images/fighters/knight.png');
 }
