@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+
+.sidebar {
+    width: 15%;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    height: 100vh; /* Full viewport height */
+    box-sizing: border-box;
+}
+
+
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    color: white;
+    background-color: #444;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.sidebar button:hover {
+    background-color: #555;
+}
+
+
+.content {
+    width: 70%;
+    align-items: center;
+}
+
+.battlefield-container {
+    width: 100%;
+}
+
+.battlefield {
+    justify-content: center;
+    margin-top: 3%;
+    display: grid;
+    grid-template-columns: repeat(8, 80px);
+    grid-template-rows: repeat(8, 80px);
+    gap: 2px;
+}
+
+.cell {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+}
+
+.unplaced-units {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 80px);
+    /*grid-template-rows: repeat(8, 80px);*/
+
+    gap: 2px;
+    width: 100%;
+    height: 90%;
+    /*height: 100%; !* Adjust depending on your design *!*/
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.unplaced-units h3 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.unit {
+    background-size: cover;
+    background-position: center; /* Centers the image within the element */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+
+    height: 80px;
+    width: 80px;
+
+    /*margin: 10px;*/
+    background-color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.unit-healths {
+            position: relative;
+            bottom: -50px;
+            left: 0px;
+            width: 30px;  /* Example size, adjust as needed */
+            height: 30px; /* Example size, adjust as needed */
+        }
+
+.unit-archer {
+    background: gray;
+}
+
+.unit-berserker {
+    background-image: url('images/fighters/berserker.png');
+}
+
+.unit-cavalry {
+    background-image: url('images/fighters/cavalry.png');
+}
+
+.unit-commander {
+    background: blue;
+}
+
+.unit-guardsman {
+    background: green;
+}
+
+.unit-infantryman {
+    background: purple;
+}
+
+.unit-knight {
+    background-image: url('images/fighters/knight.png');
+}
