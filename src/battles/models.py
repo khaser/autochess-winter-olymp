@@ -34,6 +34,16 @@ class PositionedFigher(models.Model):
     column = models.PositiveIntegerField()
     placement = models.ForeignKey(Placement, on_delete=models.CASCADE)
 
+    def map_fighter(self):
+        return {
+            'x': self.column,
+            'y': self.row,
+            'fighter_kind': self.fighter.kind,
+        }
+
+
+def get_user_fighters(user):
+    return user.get_cur_placement().positionedfigher_set.all()
 
 class BattleResult(models.TextChoices):
     RED = 'red', _('red')

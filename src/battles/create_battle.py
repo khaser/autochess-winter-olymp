@@ -25,6 +25,9 @@ def create_battle(red_username, blue_username):
         raise f"Game not finished, fighters alive: (red: {len(red_team_fin)}, blue: {len(blue_team_fin)})"
     battle.save()
 
+def map_fighters(plc):
+    return [db_fighter.map_fighter() for db_fighter in plc.positionedfigher_set.all()]
+
 def copy_user_placement(username):
     user = user_models.UserInfo.objects.get(user__first_name=username)
     plc = user.placement_set.latest("pk")
@@ -39,13 +42,3 @@ def copy_user_placement(username):
         fighter.save()
 
     return prev_plc
-
-def map_fighters(plc):
-    return [map_fighter(db_fighter) for db_fighter in plc.positionedfigher_set.all()]
-
-def map_fighter(fighter):
-    return {
-            'x': fighter.column,
-            'y': fighter.row,
-            'fighter_kind': fighter.fighter.kind,
-            }

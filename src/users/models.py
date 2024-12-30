@@ -15,3 +15,6 @@ class UserInfo(models.Model):
 
     def get_login(self):
         return self.user.first_name
+
+    def get_cur_placement(self):
+        return self.placement_set.latest("pk")
