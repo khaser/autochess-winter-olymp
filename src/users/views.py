@@ -37,7 +37,7 @@ def login(request):
             if is_correct:
                 userInfo = UserInfo.objects.filter(ejudge_user_id=ejudge_user_id).get()
                 auth.login(request, userInfo.user)
-                return redirect('map:index')
+                return redirect('battles:index')
             else:
                 form.add_error('password', 'Неверный логин/пароль')
     else:
@@ -48,4 +48,4 @@ def login(request):
 # TODO: only POST
 def logout(request):
     auth.logout(request)
-    return redirect('map:index')
+    return redirect('users:login')
