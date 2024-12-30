@@ -1,0 +1,58 @@
+from django.apps import AppConfig
+from django.conf import settings
+
+from random import shuffle
+
+import math
+
+from apscheduler.schedulers.background import BackgroundScheduler
+
+# from battle import create_battle
+
+def debug(rt, bt, round_id):
+    print(rt, bt, round_id)
+
+class TournamentConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'tournament'
+
+    def ready(self):
+        rfreq = settings.ROUND_FREQ
+        n_rounds = math.ceil((settings.CONTEST_DURATION) / rfreq)
+
+        schedule = generate_schedule(settings.REGISTRED_TEAMS, n_rounds)
+
+        scheduler = BackgroundScheduler()
+
+        assert(len(schedule) == n_rounds)
+
+        for round_id, sched_round in enumerate(schedule):
+            for red_team, blue_team in sched_round:
+                if red_team == None:
+                    # TODO
+                    continue
+                battle_time = settings.CONTEST_START_TIME + (round_id + 1) * settings.ROUND_FREQ
+                scheduler.add_job(debug, 'date', args=[red_team, blue_team, round_id], run_date=battle_time)
+
+        scheduler.start()
+
+def generate_schedule(team_list, round_count):
+    teams = team_list[:]
+    n = len(teams)
+    if n % 2 != 0:
+        teams.append(None)
+        n += 1
+    result = []
+    for shift in range(round_count):
+        if shift % (n - 1) == 0 and shift != 0:
+            shuffle(teams)
+        round_result = []
+        for i in range(n // 2):
+            round_result.append([teams[i], teams[n - i - 1]])
+        result.append(round_result)
+        tmp = teams[1]
+        teams[1] = teams[n - 1]
+        for j in range(2, n):
+            teams[j], tmp = tmp, teams[j]
+    return result
+

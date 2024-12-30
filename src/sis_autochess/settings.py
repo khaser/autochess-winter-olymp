@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ejudge',
     'users',
     'battles',
+    'tournament',
 ]
 
 MIDDLEWARE = [
@@ -145,9 +146,19 @@ EJUDGE_SERVE_CFG_ENCODING = 'utf-8'
 
 REGISTRED_TEAMS = [
                     '4-bubnov',
+                    '4-bataev',
+                    '4-bochkanova',
+                    '4-glushanok',
+                    '4-gulova',
                   ]
 
 import datetime
-CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 15, 30, 0)
-CONTEST_DURATION = 600
+
+CONTEST_DURATION = datetime.timedelta(hours=5)
+
+# CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 15, 30, 0)
+CONTEST_START_TIME = datetime.datetime(2024, 12, 30, 7, 25, 0)
+
+# ROUND_FREQ = datetime.timedelta(minutes=15)
+ROUND_FREQ = datetime.timedelta(seconds=3)
 

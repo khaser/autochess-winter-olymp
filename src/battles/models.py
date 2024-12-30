@@ -36,7 +36,11 @@ class Battle(models.Model):
     red_team = models.OneToOneField(user_models.UserInfo, on_delete=models.CASCADE, related_name = "battles_as_red")
     blue_team = models.OneToOneField(user_models.UserInfo, on_delete=models.CASCADE, related_name = "battles_as_blue")
 
-    pub_date = models.DateTimeField("date published")
+    class BattleResult(models.TextChoices):
+        RED = 'R', _('Blue')
+        BLUE = 'B', _('Red')
 
-    def __str__(self):
-        return self.question_text
+    result = models.CharField(
+        choices=BattleResult.choices,
+        max_length = 1,
+    )

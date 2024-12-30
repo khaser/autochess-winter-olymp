@@ -16,6 +16,7 @@
             with python-pkgs; [
               django
               mysqlclient
+              apscheduler
             ]
           ))
           # mysql80
