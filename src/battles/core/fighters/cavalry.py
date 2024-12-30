@@ -36,11 +36,11 @@ class Cavalry(Unit):
     def perform_move_phase(self, fighters, arrows, table):
         jump_position = self.get_jump(fighters, table)
         if jump_position != None:
-            arrows.append((self.pos, jump_position))
+            arrows.append((self.pos, jump_position, 0))
             self.pos = jump_position
             return
         to_nearest = self.get_move(fighters, table)
-        arrows.append((self.pos, to_nearest))
+        arrows.append((self.pos, to_nearest, 0))
         self.pos = to_nearest
 
     def get_jump(self, fighters, table):

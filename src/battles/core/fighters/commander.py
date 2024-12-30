@@ -37,7 +37,7 @@ class Commander(Unit):
                 supported_allies.append(i)
         if len(supported_allies) != 0:
             choosen_ally = random.choice(supported_allies)
-            arrows.append((self.pos, fighters[choosen_ally].pos))
+            arrows.append((self.pos, fighters[choosen_ally].pos, 1))
             killed = fighters[choosen_ally].perform_attack_phase(fighters, arrows)
             return killed
 

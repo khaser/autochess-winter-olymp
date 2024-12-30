@@ -37,7 +37,7 @@ class Unit():
 
     def attack(self, fighters, arrows, attackable):
         fighters[attackable].hp -= self.ap
-        arrows.append((self.pos, fighters[attackable].pos))
+        arrows.append((self.pos, fighters[attackable].pos, 1))
 
     def perform_attack_phase(self, fighters, arrows):
         attackable_fighters = []
@@ -50,7 +50,7 @@ class Unit():
 
     def perform_move_phase(self, fighters, arrows, table):
         to_nearest = self.get_move(fighters, table)
-        arrows.append((self.pos, to_nearest))
+        arrows.append((self.pos, to_nearest, 0))
         self.pos = to_nearest
 
     def perform_turn(self, fighters, arrows, table):
