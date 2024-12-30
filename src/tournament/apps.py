@@ -9,8 +9,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 def create_battle_wrapper(red_team, blue_team):
     from battles.create_battle import create_battle
-
-    print(red_team, blue_team)
     return create_battle(red_team, blue_team)
 
 class TournamentConfig(AppConfig):

@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 from users import models as user_models
 
@@ -48,3 +49,14 @@ class Battle(models.Model):
         max_length=16,
         blank=True,
     )
+
+    time = models.DateTimeField(default=timezone.now)
+
+    def red_username(self):
+        return self.red_placement.user.get_login()
+
+    def blue_username(self):
+        return self.blue_placement.user.get_login()
+
+    def winner_username(self):
+        return self.blue_username() if self.result == 'blue' else self.red_username()

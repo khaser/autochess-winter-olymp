@@ -15,8 +15,6 @@ def create_battle(red_username, blue_username):
     # TODO: generate seed and store to DB
     red_team = map_fighters(red_plc)
     blue_team = map_fighters(blue_plc)
-    print(red_team)
-    print(blue_team)
     (red_team_fin, blue_team_fin, _) = game.fight(red_team, blue_team, settings.TURNS_IN_ROUND_LIMIT, 1)
 
     if len(red_team_fin) > 0:

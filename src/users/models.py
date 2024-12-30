@@ -12,3 +12,6 @@ class UserInfo(models.Model):
         default=0,
         blank=True,
     )
+
+    def get_login(self):
+        return self.user.first_name
