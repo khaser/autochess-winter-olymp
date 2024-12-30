@@ -105,11 +105,11 @@ body {
 }
 
 .unit-berserker {
-    background-image: url('images/fighters/berserker.png');
+    background-image: url('/static/images/fighters/berserker.png');
 }
 
 .unit-cavalry {
-    background-image: url('images/fighters/cavalry.png');
+    background-image: url('/static/images/fighters/cavalry.png');
 }
 
 .unit-commander {
@@ -125,7 +125,7 @@ body {
 }
 
 .unit-knight {
-    background-image: url('images/fighters/knight.png');
+    background-image: url('/static/images/fighters/knight.png');
 }
 
 #battles-list {
