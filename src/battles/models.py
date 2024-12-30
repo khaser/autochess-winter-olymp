@@ -6,17 +6,15 @@ from users import models as user_models
 
 # Create your models here.
 
-import battles.core
-
 class Fighter(models.Model):
 
     class FighterKind(models.TextChoices):
-        ARCHER = 'ARC', _('Archer')
-        BERSERKER = 'BER', _('Berserker')
-        CAVALRY = 'CAV', _('Cavalry')
-        COMMANDER = 'COM', _('Commander')
-        KNIGHT = 'KN', _('Knight')
-        INFANTRYMAN = 'INF', _('Infantryman')
+        ARCHER = 'ARC', _('archer')
+        BERSERKER = 'BER', _('berserker')
+        CAVALRY = 'CAV', _('cavalry')
+        COMMANDER = 'COM', _('commander')
+        KNIGHT = 'KN', _('knight')
+        INFANTRYMAN = 'INF', _('infantryman')
 
     kind = models.CharField(
         choices=FighterKind.choices,
@@ -26,21 +24,26 @@ class Fighter(models.Model):
     ejudge_short_name = models.CharField(db_index=True, max_length=255)
 
 
-class PositionedFigher(models.Model):
-    fighter = models.OneToOneField(Fighter, on_delete=models.CASCADE)
-    row = models.PositiveIntegerField()
-    column = models.PositiveIntegerField()
+class Placement(models.Model):
     user = models.ForeignKey(user_models.UserInfo, on_delete=models.CASCADE)
 
+class PositionedFigher(models.Model):
+    fighter = models.ForeignKey(Fighter, on_delete=models.CASCADE)
+    row = models.PositiveIntegerField()
+    column = models.PositiveIntegerField()
+    placement = models.ForeignKey(Placement, on_delete=models.CASCADE)
+
 class Battle(models.Model):
-    red_team = models.OneToOneField(user_models.UserInfo, on_delete=models.CASCADE, related_name = "battles_as_red")
-    blue_team = models.OneToOneField(user_models.UserInfo, on_delete=models.CASCADE, related_name = "battles_as_blue")
+
+    red_placement = models.OneToOneField(Placement, on_delete=models.CASCADE, related_name = "battles_as_red")
+    blue_placement = models.OneToOneField(Placement, on_delete=models.CASCADE, related_name = "battles_as_blue")
 
     class BattleResult(models.TextChoices):
-        RED = 'R', _('Blue')
-        BLUE = 'B', _('Red')
+        RED = 'R', _('blue')
+        BLUE = 'B', _('red')
 
     result = models.CharField(
         choices=BattleResult.choices,
-        max_length = 1,
+        max_length=1,
+        blank=True,
     )

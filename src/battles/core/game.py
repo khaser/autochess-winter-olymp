@@ -2,13 +2,13 @@ import random
 import time
 
 
-from fighters.infantryman import Infantryman
-from fighters.knight import Knight
-from fighters.archer import Archer
-from fighters.berserker import Berserker
-from fighters.cavalry import Cavalry
-from fighters.guardsman import Guardsman
-from fighters.commander import Commander
+from .fighters.infantryman import Infantryman
+from .fighters.knight import Knight
+from .fighters.archer import Archer
+from .fighters.berserker import Berserker
+from .fighters.cavalry import Cavalry
+from .fighters.guardsman import Guardsman
+from .fighters.commander import Commander
 
 
 class Table():
@@ -144,11 +144,12 @@ def fight(a_fighters, b_fighters, turns, random_seed):
 
     current_game = Game([a_fighters, b_fighters], Table(8, 8), random_seed)
     # run turns emulation
-    for _ in range(turns):
-        current_game.make_turn()
-        if current_game.is_finished():
-            break
-    # get actual info about game 
+    if not current_game.is_finished():
+        for _ in range(turns):
+            current_game.make_turn()
+            if current_game.is_finished():
+                break
+    # get actual info about game
     fighters = current_game.extract_metas_from_fighters()
     lst_arrows = current_game.extract_arrows()
     # return actual info

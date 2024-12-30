@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/users/login/'
 LOGOUT_URL = '/users/logout/'
 
-EJUDGE_CONTEST_ID = 43998
+EJUDGE_CONTEST_ID = 47402
 # EJUDGE_SERVE_CFG = os.path.join(BASE_DIR, '..', 'serve.cfg')
 EJUDGE_SERVE_CFG_ENCODING = 'utf-8'
 
@@ -157,8 +157,10 @@ import datetime
 CONTEST_DURATION = datetime.timedelta(hours=5)
 
 # CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 15, 30, 0)
-CONTEST_START_TIME = datetime.datetime(2024, 12, 30, 7, 25, 0)
+CONTEST_START_TIME = datetime.datetime(2024, 12, 30, 17, 9, 0)
 
 # ROUND_FREQ = datetime.timedelta(minutes=15)
-ROUND_FREQ = datetime.timedelta(seconds=3)
+ROUND_FREQ = datetime.timedelta(seconds=60)
 
+
+TURNS_IN_ROUND_LIMIT = 1000

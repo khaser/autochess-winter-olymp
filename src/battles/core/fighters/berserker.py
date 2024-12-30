@@ -1,5 +1,5 @@
 import random
-from fighters.unit import Unit
+from ..fighters.unit import Unit
 
 
 class Berserker(Unit):

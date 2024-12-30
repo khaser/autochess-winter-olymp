@@ -1,6 +1,6 @@
 import random
 import collections 
-from fighters.unit import Unit
+from ..fighters.unit import Unit
 
 
 class Knight(Unit):

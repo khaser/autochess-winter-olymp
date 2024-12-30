@@ -10,6 +10,7 @@ class UsersConfig(AppConfig):
     def ready(self):
         from .models import UserInfo
         from django.contrib.auth.models import User
+        from battles import models as battles_models
 
         def create_user(login):
             db = EjudgeDatabase()
@@ -20,6 +21,9 @@ class UsersConfig(AppConfig):
 
             user = User.objects.create_user(login, first_name=login)
             userInfo = UserInfo.objects.create(user=user, ejudge_user_id=ejudge_user_id)
+            battles_models.Placement.objects.create(user=userInfo)
+
+            # TODO: check submitted tasks
 
             return userInfo
 
@@ -27,4 +31,3 @@ class UsersConfig(AppConfig):
 
         for team_login in settings.REGISTRED_TEAMS:
             create_user(team_login)
-

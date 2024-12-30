@@ -3,20 +3,22 @@ from django.conf import settings
 
 from random import shuffle
 
-import math
+import math, datetime
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-# from battle import create_battle
+def create_battle_wrapper(red_team, blue_team):
+    from battles.create_battle import create_battle
 
-def debug(rt, bt, round_id):
-    print(rt, bt, round_id)
+    print(red_team, blue_team)
+    return create_battle(red_team, blue_team)
 
 class TournamentConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'tournament'
 
     def ready(self):
+
         rfreq = settings.ROUND_FREQ
         n_rounds = math.ceil((settings.CONTEST_DURATION) / rfreq)
 
@@ -27,12 +29,13 @@ class TournamentConfig(AppConfig):
         assert(len(schedule) == n_rounds)
 
         for round_id, sched_round in enumerate(schedule):
-            for red_team, blue_team in sched_round:
-                if red_team == None:
+            for battle_in_round, (red_team, blue_team) in enumerate(sched_round):
+                if red_team == None or blue_team == None:
                     # TODO
                     continue
-                battle_time = settings.CONTEST_START_TIME + (round_id + 1) * settings.ROUND_FREQ
-                scheduler.add_job(debug, 'date', args=[red_team, blue_team, round_id], run_date=battle_time)
+                battle_time = settings.CONTEST_START_TIME + (round_id + 1) * settings.ROUND_FREQ + \
+                                battle_in_round * datetime.timedelta(seconds=5)
+                scheduler.add_job(create_battle_wrapper, 'date', args=[red_team, blue_team], run_date=battle_time)
 
         scheduler.start()
 
