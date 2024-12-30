@@ -111,6 +111,7 @@ class Game():
         meta = dict()
         meta["x"] = fighter.pos[0]
         meta["y"] = fighter.pos[1]
+        meta["hp"] = fighter.hp
         meta["fighter_kind"] = fighter.fighter_kind
         return meta
 

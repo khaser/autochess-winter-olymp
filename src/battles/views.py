@@ -3,9 +3,31 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from . import models as battle_models
+from .core.game import fight
 
 def details(request, battle_id, turn):
     battle_turn_view = get_object_or_404(Battle, pk=battle_id)
+
+    red_fighters, blue_fighters = [
+          {"fighter_kind": "archer", "x": 3, "y": 1},
+          {"fighter_kind": "berserker", "x": 3, "y": 3},
+          {"fighter_kind": "cavalry", "x": 4, "y": 2},
+    ], [
+          {"fighter_kind": "berserker", "x": 3, "y": 1},
+          {"fighter_kind": "cavalry", "x": 4, "y": 1},
+          {"fighter_kind": "berserker", "x": 5, "y": 1},
+    ]
+    
+    # TODO NOW random_seed is equal to 1 maybe fix that
+    red_fighters, blue_fighters, turn_arrows = fight(red_fighters, blue_fighters, turn, 1)
+
+    return render(request, "battles/details.html", {
+        'battle_id': battle_id,
+        'turn': turn,
+        'red_fighters': red_fighters,
+        'blue_fighters': blue_fighters,
+        'arrows': turn_arrows
+    })
 
 @login_required
 def index(request):
