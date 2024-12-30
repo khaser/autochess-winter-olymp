@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -13,8 +13,11 @@ from .core.game import fight
 from users import models as user_models
 
 @login_required
-def details(request, battle_id, turn):
+def details_neg(request, battle_id, turn):
+    return redirect('battles:details', battle_id=battle_id, turn=0)
 
+@login_required
+def details(request, battle_id, turn):
     user = request.user.info
 
     red_db_fighters = battle_models.get_user_fighters(user)
