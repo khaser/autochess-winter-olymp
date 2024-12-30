@@ -11,12 +11,11 @@ class Contest:
         self.problems = self.extract_problems_from_serve_cfg(self.serve_cfg)
 
         self.start_time = settings.CONTEST_START_TIME
-        self.finish_time = self.start_time + \
-            datetime.timedelta(minutes=settings.CONTEST_DURATION)
-        self.fog_time = self.finish_time - \
-            datetime.timedelta(minutes=int(self.serve_cfg['_GLOBAL_']['board_fog_time']))
-        self.unfog_time = self.finish_time + \
-            datetime.timedelta(minutes=int(self.serve_cfg['_GLOBAL_']['board_unfog_time']))
+        self.finish_time = self.start_time + settings.CONTEST_DURATION
+        # self.fog_time = self.finish_time - \
+        #     datetime.timedelta(minutes=int(self.serve_cfg['_GLOBAL_']['board_fog_time']))
+        # self.unfog_time = self.finish_time + \
+        #     datetime.timedelta(minutes=int(self.serve_cfg['_GLOBAL_']['board_unfog_time']))
 
     @staticmethod
     def read_serve_cfg(serve_cfg_name):

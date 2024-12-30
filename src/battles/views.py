@@ -1,7 +1,12 @@
 from django.shortcuts import render
 
 from django.contrib.auth.decorators import login_required
-from django.http import *
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse, HttpResponseBadRequest
+
+from ejudge.models import Contest
+from ejudge.database import EjudgeDatabase, RunStatus
+from django.conf import settings
 
 from . import models as battle_models
 from .core.game import fight
@@ -50,16 +55,17 @@ def index(request):
 
 
 @login_required
+@csrf_exempt
 def planning(request):
     user = request.user.info
     plc = user.get_cur_placement()
 
     if request.method == 'POST':
-        match request.body().split():
+        match request.body.split():
             case (row, column, task):
-                return post_fighter(row, column, task, user)
+                return post_fighter(row, column, task.decode('ascii'), user)
             case _:
-                return Http406("invalid number of arguments")
+                return HttpResponseBadRequest("invalid number of arguments")
 
     elif request.method == 'GET':
         unplaced_fighters = [
@@ -110,41 +116,38 @@ def post_fighter(row, column, task_sn, user):
     try:
         row = int(row)
         column = int(column)
-        if not (5 < column < 8 and 0 <= row < 8):
-            return Http406
-        # check task is solved
-        if not check_task_is_solved(task_sn, user):
-            return Http406
-
-        if len(battle_models.PositionedFighter.filter(row=row, column=column)):
-            return Http406
-
-        plc = request.users.get_cur_placement()
-        try:
-            pos_fighter = plc.positionedfigher_set.get(fighter__ejudge_short_name=task_sn)
-        except:
-            fighter = battle_models.Fighters.get(ejudge_short_name=tasn_sn)
-            battle_models.PositionedFighter.create(
-                        fighter=fighter,
-                        row=row,
-                        column=y,
-                        placement=plc,
-                      )
-
     except:
-        return Http406
+        return HttpResponseBadRequest("Row or column can't be parsed as int")
+
+    if not (5 < column < 8 and 0 <= row < 8):
+        return HttpResponseBadRequest("Coordinates violates accepted range")
+    # check task is solved
+    if not check_task_is_solved(task_sn, user):
+        return HttpResponseBadRequest("Task is not solved")
+
+    if len(battle_models.PositionedFigher.objects.filter(row=row, column=column)):
+        return HttpResponseBadRequest("Cell is already taken")
+
+    plc = user.get_cur_placement()
+    try:
+        pos_fighter = plc.positionedfigher_set.get(fighter__ejudge_short_name=task_sn)
+    except:
+        fighter = battle_models.Fighter.objects.get(ejudge_short_name=task_sn)
+        battle_models.PositionedFigher.create(
+                    fighter=fighter,
+                    row=row,
+                    column=column,
+                    placement=plc,
+                  )
+    return HttpResponse("ok")
 
 
-def check_task_is_solved(task, user):
+def check_task_is_solved(task, user_info):
     contest = Contest(settings.EJUDGE_SERVE_CFG)
     ejudge_database = EjudgeDatabase()
-    for run in ejudge_database.get_runs_by_user(user):
-        if run.status == RunStatus.IGNORED:
-            continue
-        # We don't have tile for this ejudge problem
-        if contest.problems[run.problem_id].short_name not in tiles_by_short_name:
-            continue
-        if run.status == RunStatus.OK:
+    for run in ejudge_database.get_runs_by_user(user_info.user):
+        short_name = contest.problems[run.problem_id].short_name
+        if task == short_name and run.status == RunStatus.OK:
             return True
     return False
 
