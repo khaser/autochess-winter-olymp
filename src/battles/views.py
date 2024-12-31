@@ -14,7 +14,6 @@ from users import models as user_models
 
 import math
 
-@login_required
 def details_neg(request, battle_id, turn):
     return redirect('battles:details', battle_id=battle_id, turn=0)
 
