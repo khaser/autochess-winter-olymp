@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-jys=axcb&c_b8n6tb3x9c(ug-q=z7jxmp+e^@i-f@ubb)wki4!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [ '192.168.49.68', 'localhost' ]
 
 # Application definition
 
@@ -158,13 +157,12 @@ REGISTRED_TEAMS = [
 
 import datetime
 
-CONTEST_DURATION = datetime.timedelta(hours=5)
+CONTEST_DURATION = datetime.timedelta(hours=4)
 
-# CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 15, 30, 0)
-CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 8, 15, 0)
+CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 16, 30, 0)
 
-# ROUND_FREQ = datetime.timedelta(minutes=15)
-ROUND_FREQ = datetime.timedelta(seconds=15)
+ROUND_FREQ = datetime.timedelta(minutes=5)
+# ROUND_FREQ = datetime.timedelta(seconds=15)
 
 # Maximum units placed on the board by one player
 FIGHTER_LIMIT = 16
