@@ -37,11 +37,12 @@ body {
     width: 70%;
     height: 100%;
     align-items: center;
-
+    background-color: #f2f2f2;
 }
 
 .battlefield-container {
     width: 100%;
+
 }
 
 .battlefield {
@@ -51,13 +52,15 @@ body {
     grid-template-columns: repeat(8, 80px);
     grid-template-rows: repeat(8, 80px);
     gap: 2px;
+
 }
 
 .cell {
     width: 80px;
     height: 80px;
     border: 1px solid #ddd;
-    background-color: #f2f2f2;
+    //background-color: #f2f2f2;
+    background-image: url('/static/images/battle_bg2.jpg');
 }
 
 .unplaced-units {
@@ -89,7 +92,7 @@ body {
     width: 80px;
 
     /*margin: 10px;*/
-    background-color: #ddd;
+    //background-color: #ddd;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -105,6 +108,7 @@ body {
 .cross {
     width: 80px; /* Example size, adjust as needed */
     height: 80px; /* Example size, adjust as needed */
+    opacity: 0.3;
 }
 
 .unit-archer {
@@ -147,7 +151,7 @@ table {
 th {
     position: sticky;
     top: 0;
-    background-color: #f2f2f2; /* Header background color */
+    //background-color: #f2f2f2; /* Header background color */
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Optional shadow for better visibility */
     padding: 8px;
     border-bottom: 2px solid #ddd;
@@ -200,6 +204,7 @@ h1 {
 }
 
 .sections {
+    margin: 5px 0;
     overflow-y: scroll;
     height: 85%;
 }
