@@ -25,8 +25,7 @@ class UsersConfig(AppConfig):
 
             return userInfo
 
-        User.objects.filter(is_superuser=False).all().delete()
-
-        for team_login in settings.REGISTRED_TEAMS:
-            create_user(team_login)
+        # User.objects.filter(is_superuser=False).all().delete()
+        # for team_login in settings.REGISTRED_TEAMS:
+        #     create_user(team_login)
 
