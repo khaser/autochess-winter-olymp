@@ -5,11 +5,11 @@
 {% for arrow in arrows %}
 <svg class="arrow" style="position:absolute;width:100%;height:100%; pointer-events: none" data-start-x="{{ arrow.0.0 }}" data-start-y="{{ arrow.0.1 }}" data-finish-x="{{ arrow.1.0  }}" data-finish-y="{{ arrow.1.1 }}">
     <defs>
-        <marker id='head' orient="auto" markerWidth='3' markerHeight='4' refX='0.1' refY='2'>
+        <marker id='head' orient="auto" markerWidth='5' markerHeight='6' refX='0.1' refY='2'>
             <path d='M0,0 V4 L2,2 Z' fill={% if arrow.2 == 0 %} #ADD8E6 {% else %} orange {% endif %}/>
         </marker>
     </defs>
-    <path class="direction" id='arrow-line' marker-end='url(#head)' stroke-width='4' fill='none' stroke={% if arrow.2 == 0 %} #ADD8E6 {% else %} orange {% endif %}/>
+    <path class="direction" id='arrow-line' marker-end='url(#head)' stroke-width='8' fill='none' stroke={% if arrow.2 == 0 %} #ADD8E6 {% else %} orange {% endif %}/>
 </svg>
 {% endfor %}
 
