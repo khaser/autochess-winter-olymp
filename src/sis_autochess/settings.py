@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-jys=axcb&c_b8n6tb3x9c(ug-q=z7jxmp+e^@i-f@ubb)wki4!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '192.168.49.68', 'localhost' ]
+ALLOWED_HOSTS = [ '192.168.48.173', '192.168.49.68', 'localhost' ]
 
 # Application definition
 
@@ -142,24 +142,38 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/users/login'
 LOGOUT_URL = '/users/logout'
 
-EJUDGE_CONTEST_ID = 47401
+EJUDGE_CONTEST_ID = 47998
 EJUDGE_SERVE_CFG = BASE_DIR / '..' / 'serve.cfg'
 EJUDGE_SERVE_CFG_ENCODING = 'utf-8'
 
 REGISTRED_TEAMS = [
-                    '4-bubnov',
-                    '4-bataev',
-                    '4-bochkanova',
-                    '4-glushanok',
-                    '4-gulova',
-                    '4-zapolskiy',
+                    'winter-2024-21',
+                    'winter-2024-22',
+                    'winter-2024-23',
+                    'winter-2024-24',
+                    'winter-2024-25',
+                    'winter-2024-26',
+                    'winter-2024-27',
+                    'winter-2024-28',
+                    'winter-2024-29',
+                    'winter-2024-30',
+                    'winter-2024-31',
+                    'winter-2024-32',
+                    'winter-2024-33',
+                    'winter-2024-34',
+                    'winter-2024-35',
+                    'winter-2024-36',
+                    'winter-2024-37',
+                    'winter-2024-38',
+                    'winter-2024-39',
+                    'winter-2024-40',
                   ]
 
 import datetime
 
 CONTEST_DURATION = datetime.timedelta(hours=4)
 
-CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 16, 30, 0)
+CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 16, 45, 0)
 
 ROUND_FREQ = datetime.timedelta(minutes=5)
 # ROUND_FREQ = datetime.timedelta(seconds=15)
