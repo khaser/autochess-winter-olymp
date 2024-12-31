@@ -32,7 +32,11 @@ document.querySelectorAll('.cell').forEach(cell => {
            fetch(url, options)
                 .then(response => {
                     if (response.status === 400) {
-                        response.text().then(text => alert(text))
+                        response.text().then(text => {
+                            if (!alert(text)) {
+                                window.location.reload();
+                            }
+                        })
                     } else if (!response.ok) {
                         alert("Unexpected error. Try later")
                     }
