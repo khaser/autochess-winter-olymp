@@ -12,6 +12,8 @@ from . import models as battle_models
 from .core.game import fight
 from users import models as user_models
 
+import math
+
 @login_required
 def details_neg(request, battle_id, turn):
     return redirect('battles:details', battle_id=battle_id, turn=0)
@@ -40,7 +42,6 @@ def details(request, battle_id, turn):
     })
 
 # TODO: rewrite with generic.ListView
-@login_required
 def index(request):
     battles = []
     for battle in battle_models.Battle.objects.all():
@@ -58,17 +59,47 @@ def index(request):
 
 
 def scores(request):
-    results = [
-        {"place" : 1, "name" : "ABOBA", "score" : 100},
-        {"place" : 2, "name" : "sample_text", "score" : 77},
-        {"place" : 3, "name" : "kto prochital", "score" : 69},
-        {"place" : 4, "name" : "tot molodec", "score" : 55},
-    ]
+
+    uscores = []
+    for user_info in user_models.UserInfo.objects.all():
+        uscores.append((calculate_score(user_info), user_info))
+
+    uscores.sort(key=lambda x: x[0], reverse=True)
+
+    results = []
+    for place, (score, user_info) in enumerate(uscores):
+        results.append({
+            "place": place + 1,
+            "name": user_info.get_login(),
+            "score": score,
+        })
 
     return render(request, 'battles/scores.html', {
         'results': results
     })
 
+
+def calculate_score(user_info):
+    res = 0
+    for placement in battle_models.Placement.objects.filter(user=user_info).all():
+        def helper(battle):
+            return math.sqrt((battle.time.replace(tzinfo=None) -
+                        settings.CONTEST_START_TIME.replace(tzinfo=None)).seconds // 60)
+        try:
+            battle = placement.battles_as_blue
+            if battle.result == battle_models.BattleResult.BLUE:
+                res += helper(battle)
+        except battle_models.Placement.battles_as_blue.RelatedObjectDoesNotExist:
+            pass
+
+        try:
+            import datetime as dt
+            battle = placement.battles_as_red
+            if battle.result == battle_models.BattleResult.RED:
+                res += helper(battle)
+        except battle_models.Placement.battles_as_red.RelatedObjectDoesNotExist:
+            pass
+    return res
 
 @login_required
 @csrf_exempt
