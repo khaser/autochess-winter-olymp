@@ -44,10 +44,12 @@ def details(request, battle_id, turn):
 # TODO: rewrite with generic.ListView
 def index(request):
     battles = []
+    from datetime import datetime
     for battle in battle_models.Battle.objects.all():
+        print(type(battle.time))
         battles.append({
             'battle_id': battle.pk,
-            'time': battle.time,
+            'time': datetime.strftime(battle.time, "%I:%M"),
             'red_username': battle.red_username(),
             'blue_username': battle.blue_username(),
             'winner_username': battle.winner_username(),
