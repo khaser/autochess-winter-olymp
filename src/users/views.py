@@ -37,7 +37,7 @@ def login(request):
             if is_correct:
                 userInfo = UserInfo.objects.filter(ejudge_user_id=ejudge_user_id).get()
                 auth.login(request, userInfo.user)
-                return redirect('battles:index')
+                return redirect('battles:lore')
             else:
                 form.add_error('password', 'Неверный логин/пароль')
     else:
