@@ -111,6 +111,8 @@ def planning(request):
         match request.body.split():
             case (row, column, task):
                 return post_fighter(row, column, task.decode('ascii'), user)
+            case (task,):
+                return retire_fighter(task.decode('ascii'), user)
             case _:
                 return HttpResponseBadRequest("invalid number of arguments")
 
@@ -121,16 +123,15 @@ def planning(request):
         placed_tasks = set()
 
         for fighter in plc.positionedfigher_set.all():
-            if fighter.column != None and fighter.row != None:
-                shortname = fighter.fighter.ejudge_short_name
-                placed_fighters.append({
-                    'shortname': shortname,
-                    'fighter_kind': fighter.fighter.kind,
-                    'hp': fighter.fighter.getHp(),
-                    'x': fighter.row,
-                    'y': fighter.column,
-                })
-                placed_tasks.add(shortname)
+            shortname = fighter.fighter.ejudge_short_name
+            placed_fighters.append({
+                'shortname': shortname,
+                'fighter_kind': fighter.fighter.kind,
+                'hp': fighter.fighter.getHp(),
+                'x': fighter.row,
+                'y': fighter.column,
+            })
+            placed_tasks.add(shortname)
 
         for fighter in battle_models.Fighter.objects.all():
             if check_task_is_solved(fighter.ejudge_short_name, user) and \
@@ -166,6 +167,15 @@ def monsters(request):
         return render(request, 'battles/rules/monsters.html', {
 
         })
+
+def retire_fighter(task_sn, user):
+    fighter_to_rem = user.get_cur_placement().positionedfigher_set.filter(fighter__ejudge_short_name=task_sn).all()
+    assert len(fighter_to_rem) < 2
+    if len(fighter_to_rem) == 1:
+        fighter_to_rem[0].delete()
+        return HttpResponse("ok")
+    else:
+        return HttpResponseBadRequest("Fighter for this task haven't posted")
 
 
 def post_fighter(row, column, task_sn, user):
