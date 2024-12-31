@@ -18,7 +18,7 @@ document.querySelectorAll('.cell').forEach(cell => {
         const y = cell.getAttribute("data-y");
         console.log(y)
         if (unit && !cell.childElementCount && y > 4) {
-            cell.appendChild(unit);
+
             const url = '/battles/planning';
             const textData = x + " " + y + " " + unit.getAttribute("id");
             const options = {
@@ -29,7 +29,16 @@ document.querySelectorAll('.cell').forEach(cell => {
                 body: textData
             };
 
-            fetch(url, options);
+           fetch(url, options)
+                .then(response => {
+                    if (response.status === 400) {
+                        response.text().then(text => alert(text))
+                    } else if (!response.ok) {
+                        alert("Unexpected error. Try later")
+                    }
+                })
+
+            cell.appendChild(unit);
         }
     });
 });
@@ -46,7 +55,6 @@ unplacedUnitsContainer.addEventListener('drop', event => {
     const unit = document.getElementById(unitId);
 
     if (unit) {
-        unplacedUnitsContainer.appendChild(unit);
         const url = '/battles/planning';
         const textData = unit.getAttribute("id");
         const options = {
@@ -57,6 +65,15 @@ unplacedUnitsContainer.addEventListener('drop', event => {
             body: textData
         };
 
-        fetch(url, options);
+        fetch(url, options)
+                .then(response => {
+                    if (response.status === 400) {
+                        response.text().then(text => alert(text))
+                    } else if (!response.ok) {
+                        alert("Unexpected error. Try later")
+                    }
+                })
+
+        unplacedUnitsContainer.appendChild(unit);
     }
 });
