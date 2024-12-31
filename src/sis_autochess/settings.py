@@ -165,5 +165,7 @@ CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 9, 50, 0)
 # ROUND_FREQ = datetime.timedelta(minutes=15)
 ROUND_FREQ = datetime.timedelta(seconds=15)
 
+# Maximum units placed on the board by one player
+FIGHTER_LIMIT = 16
 
 TURNS_IN_ROUND_LIMIT = 1000

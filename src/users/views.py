@@ -13,18 +13,6 @@ def is_login_and_password_correct(login, password):
         return False, 0
     return True, ejudge_database.get_user_by_login(login)['user_id']
 
-
-def get_user_or_create(login, password, ejudge_user_id):
-    qs = User.objects.filter(username=login)
-    if qs.exists():
-        user = qs.first()
-    else:
-        user = User.objects.create_user(login, password=password, first_name=login)
-
-    user.info.ejudge_user_id = ejudge_user_id
-    return user
-
-
 def login(request):
     if request.method == 'POST':
         form = forms.LoginForm(data=request.POST)

@@ -191,16 +191,23 @@ def post_fighter(row, column, task_sn, user):
     if not check_task_is_solved(task_sn, user):
         return HttpResponseBadRequest("Task is not solved")
 
-    if len(battle_models.PositionedFigher.objects.filter(row=row, column=column)):
+    plc = user.get_cur_placement()
+
+    if len(plc.positionedfigher_set.filter(row=row).filter(column=column)):
         return HttpResponseBadRequest("Cell is already taken")
 
-    plc = user.get_cur_placement()
     try:
+        if (plc.positionedfigher_set.count() > settings.FIGHTER_LIMIT):
+            return HttpResponseBadRequest("Fighter limit has been reached")
+
         pos_fighter = plc.positionedfigher_set.get(fighter__ejudge_short_name=task_sn)
         pos_fighter.column = column
         pos_fighter.row = row
         pos_fighter.save()
     except battle_models.PositionedFigher.DoesNotExist:
+        if (plc.positionedfigher_set.count() >= settings.FIGHTER_LIMIT):
+            return HttpResponseBadRequest("Fighter limit has been reached")
+
         fighter = battle_models.Fighter.objects.get(ejudge_short_name=task_sn)
         battle_models.PositionedFigher.objects.create(
                     fighter=fighter,
