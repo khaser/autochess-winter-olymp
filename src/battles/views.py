@@ -54,7 +54,7 @@ def index(request):
         })
 
     return render(request, 'battles/index.html', {
-        'battles': battles[::-1]
+        'battles': battles[:-101:-1]
     })
 
 
