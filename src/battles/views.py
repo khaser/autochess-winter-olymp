@@ -71,7 +71,7 @@ def scores(request):
         results.append({
             "place": place + 1,
             "name": user_info.get_login(),
-            "score": score,
+            "score": round(score, 2),
         })
 
     return render(request, 'battles/scores.html', {

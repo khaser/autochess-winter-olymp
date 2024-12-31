@@ -153,6 +153,7 @@ REGISTRED_TEAMS = [
                     '4-bochkanova',
                     '4-glushanok',
                     '4-gulova',
+                    '4-zapolskiy',
                   ]
 
 import datetime
@@ -160,7 +161,7 @@ import datetime
 CONTEST_DURATION = datetime.timedelta(hours=5)
 
 # CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 15, 30, 0)
-CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 9, 50, 0)
+CONTEST_START_TIME = datetime.datetime(2024, 12, 31, 8, 15, 0)
 
 # ROUND_FREQ = datetime.timedelta(minutes=15)
 ROUND_FREQ = datetime.timedelta(seconds=15)
