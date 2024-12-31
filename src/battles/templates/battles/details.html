@@ -22,7 +22,7 @@
             <div class="cell" id="cell-{{ i }}-{{ j }}" data-x="{{ i }}" data-y="{{ j }}">
                 {%     for red_fighter in red_fighters %}
                 {%         if red_fighter.x == i and red_fighter.y == j %}
-                <div class="unit unit-{{ red_fighter.fighter_kind }}" draggable="true">
+                <div class="unit unit-{{ red_fighter.fighter_kind }}" style="background-color: rgba(255, 0, 0, 0.3);" draggable="true">
                     <img src="/static/images/healths/{{ red_fighter.hp }}.png" class="unit-healths">
                 </div>
                 {%         endif%}
@@ -30,7 +30,7 @@
 
                 {%     for blue_fighter in blue_fighters %}
                 {%         if blue_fighter.x == i and blue_fighter.y == j %}
-                <div class="unit unit-{{ blue_fighter.fighter_kind }}" draggable="true">
+                <div class="unit unit-{{ blue_fighter.fighter_kind }}" style="background-color: rgba(0, 0, 255, 0.3);" draggable="true">
                     <img src="/static/images/healths/{{ blue_fighter.hp }}.png" class="unit-healths">
                 </div>
                 {%         endif%}
