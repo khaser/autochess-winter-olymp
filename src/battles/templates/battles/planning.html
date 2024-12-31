@@ -28,7 +28,7 @@
 
 {% block right-bar %}
 <div class="sidebar">
-    <h3>Unplaced Units</h3>
+    <h3>Неразмещённые твари</h3>
     <div class="unplaced-units" id="unplaced-units">
         {% for fighter in unplaced_fighters %}
         <div class="unit unit-{{ fighter.fighter_kind }}" draggable="true" id="{{ fighter.shortname }}">

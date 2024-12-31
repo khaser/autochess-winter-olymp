@@ -6,15 +6,14 @@
     <table>
         <thead>
         <tr>
-            <th>Time of Battle</th>
-            <th>First Team</th>
-            <th>Second Team</th>
-            <th>Winner</th>
-            <th>Details</th>
+            <th>Время проведения битвы</th>
+            <th>Комадна "Красных"</th>
+            <th>Команда "Синих"</th>
+            <th>Победитель</th>
+            <th>Демонстрация матча</th>
         </tr>
         </thead>
         <tbody>
-        <!-- Example Row -->
         {% for battle in battles %}
         <tr>
             <td>{{ battle.time }}</td>
@@ -22,11 +21,10 @@
             <td>{{ battle.blue_username }}</td>
             <td>{{ battle.winner_username }}</td>
             <td>
-                <button onclick="window.location.href='/battles/{{battle.battle_id}}/0'">View Battle</button>
+                <button onclick="window.location.href='/battles/{{battle.battle_id}}/0'">Посмотреть матч</button>
             </td>
         </tr>
         {% endfor %}
-        <!-- Add more rows as needed -->
         </tbody>
     </table>
 </div>
