@@ -22,7 +22,7 @@ def create_battle(red_username, blue_username):
     elif len(blue_team_fin) > 0:
         battle.result = battle_models.BattleResult.BLUE
     else:
-        raise f"Game not finished, fighters alive: (red: {len(red_team_fin)}, blue: {len(blue_team_fin)})"
+        battle.result = battle_models.BattleResult.DRAW
     battle.save()
 
 def map_fighters(plc):

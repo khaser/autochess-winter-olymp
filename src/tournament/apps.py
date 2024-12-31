@@ -32,7 +32,7 @@ class TournamentConfig(AppConfig):
                     # TODO
                     continue
                 battle_time = settings.CONTEST_START_TIME + (round_id + 1) * settings.ROUND_FREQ + \
-                                battle_in_round * datetime.timedelta(seconds=2)
+                                battle_in_round * datetime.timedelta(seconds=1)
                 scheduler.add_job(create_battle_wrapper, 'date', args=[red_team, blue_team], run_date=battle_time)
 
         scheduler.start()

@@ -15,7 +15,21 @@ class Fighter(models.Model):
         CAVALRY = 'cavalry', _('cavalry')
         COMMANDER = 'commander', _('commander')
         KNIGHT = 'knight', _('knight')
+        GUARDSMAN = 'guardsman', _('guardsman')
         INFANTRYMAN = 'infantryman', _('infantryman')
+
+
+    def getHp(self):
+        HP_CHOICES = {
+            'archer': 5,
+            'berserker': 9,
+            'cavalry': 13,
+            'commander': 8,
+            'guardsman': 14,
+            'knight': 15,
+            'infantryman': 7,
+        }
+        return HP_CHOICES[self.kind]
 
     kind = models.CharField(
         choices=FighterKind.choices,
@@ -36,18 +50,19 @@ class PositionedFigher(models.Model):
 
     def map_fighter(self):
         return {
-            'x': self.column,
-            'y': self.row,
+            'x': self.row,
+            'y': self.column,
             'fighter_kind': self.fighter.kind,
         }
 
 
-def get_user_fighters(user):
-    return user.get_cur_placement().positionedfigher_set.all()
+def get_placement_fighters(placement):
+    return placement.positionedfigher_set.all()
 
 class BattleResult(models.TextChoices):
     RED = 'red', _('red')
     BLUE = 'blue', _('blue')
+    DRAW = 'draw', _('draw')
 
 class Battle(models.Model):
 
@@ -69,4 +84,7 @@ class Battle(models.Model):
         return self.blue_placement.user.get_login()
 
     def winner_username(self):
-        return self.blue_username() if self.result == 'blue' else self.red_username()
+        if self.result != BattleResult.DRAW:
+            return self.blue_username() if self.result == 'blue' else self.red_username()
+        else:
+            return '-'

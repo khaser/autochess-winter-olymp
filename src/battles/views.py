@@ -16,14 +16,14 @@ from users import models as user_models
 def details_neg(request, battle_id, turn):
     return redirect('battles:details', battle_id=battle_id, turn=0)
 
-@login_required
 def details(request, battle_id, turn):
-    user = request.user.info
 
-    red_db_fighters = battle_models.get_user_fighters(user)
+    battle = battle_models.Battle.objects.get(pk=battle_id)
+
+    red_db_fighters = battle_models.get_placement_fighters(battle.red_placement)
     red_fighters = [db_fighter.map_fighter() for db_fighter in red_db_fighters]
 
-    blue_db_fighters = battle_models.get_user_fighters(user)
+    blue_db_fighters = battle_models.get_placement_fighters(battle.blue_placement)
     blue_fighters = [db_fighter.map_fighter() for db_fighter in blue_db_fighters]
 
     # TODO NOW random_seed is equal to 1 maybe fix that
@@ -84,22 +84,31 @@ def planning(request):
                 return HttpResponseBadRequest("invalid number of arguments")
 
     elif request.method == 'GET':
-        unplaced_fighters = [
-            { "shortname": "A", "fighter_kind" : "cavalry", "hp" : "13"},
-            { "shortname": "B", "fighter_kind" : "knight", "hp" : "15"},
-            { "shortname": "C", "fighter_kind" : "archer", "hp" : "5"}
-        ]
-        placed_fighters = [
-            { "shortname": "D", "fighter_kind" : "cavalry", "hp" : "13", "x" : 6, "y" : 6},
-            { "shortname": "E", "fighter_kind" : "knight", "hp" : "15", "x" : 6, "y" : 7},
-            { "shortname": "F", "fighter_kind" : "archer", "hp" : "5", "x" : 5, "y" : 7}
-        ]
+        unplaced_fighters = []
+        placed_fighters = []
 
+        placed_tasks = set()
 
         for fighter in plc.positionedfigher_set.all():
-            # TODO
-            # fighters.append()
-            pass
+            if fighter.column != None and fighter.row != None:
+                shortname = fighter.fighter.ejudge_short_name
+                placed_fighters.append({
+                    'shortname': shortname,
+                    'fighter_kind': fighter.fighter.kind,
+                    'hp': fighter.fighter.getHp(),
+                    'x': fighter.row,
+                    'y': fighter.column,
+                })
+                placed_tasks.add(shortname)
+
+        for fighter in battle_models.Fighter.objects.all():
+            if check_task_is_solved(fighter.ejudge_short_name, user) and \
+                    fighter.ejudge_short_name not in placed_tasks:
+                unplaced_fighters.append({
+                    'shortname': fighter.ejudge_short_name,
+                    'fighter_kind': fighter.kind,
+                    'hp': fighter.getHp(),
+                })
 
         indexes8 = list(range(8))
 
@@ -135,7 +144,7 @@ def post_fighter(row, column, task_sn, user):
     except:
         return HttpResponseBadRequest("Row or column can't be parsed as int")
 
-    if not (5 < column < 8 and 0 <= row < 8):
+    if not (5 <= column < 8 and 0 <= row < 8):
         return HttpResponseBadRequest("Coordinates violates accepted range")
     # check task is solved
     if not check_task_is_solved(task_sn, user):
@@ -147,14 +156,18 @@ def post_fighter(row, column, task_sn, user):
     plc = user.get_cur_placement()
     try:
         pos_fighter = plc.positionedfigher_set.get(fighter__ejudge_short_name=task_sn)
-    except:
+        pos_fighter.column = column
+        pos_fighter.row = row
+        pos_fighter.save()
+    except battle_models.PositionedFigher.DoesNotExist:
         fighter = battle_models.Fighter.objects.get(ejudge_short_name=task_sn)
-        battle_models.PositionedFigher.create(
+        battle_models.PositionedFigher.objects.create(
                     fighter=fighter,
                     row=row,
                     column=column,
                     placement=plc,
                   )
+
     return HttpResponse("ok")
 
 
