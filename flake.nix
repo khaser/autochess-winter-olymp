@@ -17,6 +17,7 @@
               django
               mysqlclient
               apscheduler
+              pip
             ]
           ))
           # mysql80
