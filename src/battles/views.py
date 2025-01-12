@@ -187,7 +187,7 @@ def post_fighter(row, column, task_sn, user):
 
     if not (5 <= column < 8 and 0 <= row < 8):
         return HttpResponseBadRequest("Coordinates violates accepted range")
-    # check task is solved
+
     if not check_task_is_solved(task_sn, user):
         return HttpResponseBadRequest("Task is not solved")
 
